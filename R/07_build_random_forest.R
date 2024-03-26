@@ -9,7 +9,6 @@ train_key_vars <- train[,
                           "first_birth", 
                           "multiple_birth",
                           "missed_due_date", 
-                          "complications_drg", 
                           "complications_delivery", 
                           "complications_maternal", 
                           "complications_fetal", 
@@ -18,7 +17,7 @@ train_key_vars <- train[,
 
 # default parameters
 
-predictors <- names(train_key_vars)[2:14]
+predictors <- names(train_key_vars)[2:13]
 target <- "drg_yield"  
 
 rf_model <- randomForest(

@@ -53,10 +53,6 @@ data_complete_cases$complications_fetal <- factor(data_complete_cases$complicati
                                                       levels = c(0, 1), 
                                                       labels = c("no-complications", "complications"))
 
-data_complete_cases$complications_drg <- factor(data_complete_cases$complications_drg, 
-                                                  levels = c(0, 1), 
-                                                  labels = c("no-complications", "complications"))
-
 data_complete_cases$pre_existing_risk_fetal <- factor(data_complete_cases$pre_existing_risk_fetal, 
                                                       levels = c(0, 1), 
                                                       labels = c("low", "high"))
@@ -73,9 +69,6 @@ data_complete_cases$complications_maternal <-
 
 data_complete_cases$complications_fetal <- 
   as.factor(data_complete_cases$complications_fetal)
-
-data_complete_cases$complications_drg <- 
-  as.factor(data_complete_cases$complications_drg)
 
 data_complete_cases$pre_existing_risk_fetal <- 
   as.factor(data_complete_cases$pre_existing_risk_fetal)

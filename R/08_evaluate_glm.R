@@ -7,7 +7,7 @@ test_key_vars <- test[,
                         "drg_yield")]
 
 # make predictions to test set
-predictions <- predict(model_10, newdata = test_key_vars)
+predictions <- predict(final_model, newdata = test_key_vars)
 
 # Calculate RMSE
 rmse <- sqrt(mean((test_key_vars$drg_yield - predictions)^2))

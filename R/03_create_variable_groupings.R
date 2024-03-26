@@ -7,10 +7,10 @@ key_var <- c("id",
              "time_birth", 
              "first_birth", 
              "multiple_birth", 
-             "missed_due_date", 
-             "complications_drg")
+             "missed_due_date")
 
-complications_delivery <- c("shoulder_dystocia", 
+complications_delivery <- c("complications_drg", 
+                            "shoulder_dystocia", 
                             "frustrated_iol", 
                             "frustrated_vag", 
                             "change_method", 

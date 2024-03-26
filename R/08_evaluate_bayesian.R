@@ -8,7 +8,7 @@ test_key_vars <- test[,
 
 
 # make predictions to test set
-predictions <- data.frame(predict(model, newdata = test_key_vars))
+predictions <- data.frame(predict(bayesian_model, newdata = test_key_vars))
 
 # Evaluate the model (e.g., RMSE)
 rmse <- sqrt(mean((test_key_vars$drg_yield - predictions$Estimate)^2))
