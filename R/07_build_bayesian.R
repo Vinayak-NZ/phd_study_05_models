@@ -36,12 +36,7 @@ differences_repeated <- after_costs_repeated_means - before_costs_repeated_means
 mean_difference_repeated <- round(mean(differences_repeated), 2)
 sd_differences_repeated <- round(sd(differences_repeated), 2)
 
-prior_specification <- paste0("normal(", mean_difference_repeated, ",", sd_differences_repeated, ")")
-
-print(paste0("prior mean", " = ", mean_difference_repeated))
-print(paste0("prior sd", " = ", sd_differences_repeated))
-
-prior <- prior("normal(-229.01, 245.81)", class = "b", coef = "group_collapse1")
+prior <- brms::prior("normal(-229.01, 245.81)", class = "b", coef = "group_collapse1")
 
 # formulate-priors-intervention-effect
 

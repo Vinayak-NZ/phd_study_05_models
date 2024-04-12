@@ -16,9 +16,8 @@ train_key_vars <- train[,
                           "drg_yield")]
 
 # model-all
-model_all <- glm(drg_yield ~ ., 
-                data = train_key_vars, 
-                family = Gamma(link = "log"))
+model_all <- lm(drg_yield ~ ., 
+              data = train_key_vars)
 
 model_all_summary <- summary(model_all)
 
@@ -31,7 +30,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove first variable
-model_1 <- update(model_all, . ~ . - pre_existing_risk_fetal)
+model_1 <- update(model_all, . ~ . - complications_delivery)
 
 model_1_summary <- summary(model_1)
 
@@ -44,7 +43,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove second variable
-model_2 <- update(model_1, . ~ . - multiple_birth)
+model_2 <- update(model_1, . ~ . - pre_existing_risk_fetal)
 
 model_2_summary <- summary(model_2)
 
@@ -57,7 +56,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove third variable
-model_3 <- update(model_2, . ~ . - complications_fetal)
+model_3 <- update(model_2, . ~ . - first_birth)
 
 model_3_summary <- summary(model_3)
 
@@ -70,7 +69,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove fourth variable
-model_4 <- update(model_3, . ~ . - missed_due_date)
+model_4 <- update(model_3, . ~ . - complications_fetal)
 
 model_4_summary <- summary(model_4)
 
@@ -83,7 +82,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove fifth variable
-model_5 <- update(model_4, . ~ . - age_delivery)
+model_5 <- update(model_4, . ~ . - multiple_birth)
 
 model_5_summary <- summary(model_5)
 
@@ -96,7 +95,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove sixth variable
-model_6 <- update(model_5, . ~ . - first_birth)
+model_6 <- update(model_5, . ~ . - age_delivery)
 
 model_6_summary <- summary(model_6)
 
@@ -109,7 +108,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove seventh variable
-model_7 <- update(model_6, . ~ . - complications_delivery)
+model_7 <- update(model_6, . ~ . - time_birth)
 
 model_7_summary <- summary(model_7)
 
@@ -122,7 +121,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove eigth variable
-model_8 <- update(model_7, . ~ . - time_birth)
+model_8 <- update(model_7, . ~ . - complications_maternal)
 
 model_8_summary <- summary(model_8)
 
@@ -135,7 +134,7 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # remove ninth variable
-model_9 <- update(model_8, . ~ . - complications_maternal)
+model_9 <- update(model_8, . ~ . - missed_due_date)
 
 model_9_summary <- summary(model_9)
 
@@ -148,11 +147,9 @@ rownames(model_coefficients) <- NULL
 max_p_value <- model_coefficients[model_coefficients$`Pr(>|t|)`==  max(model_coefficients$`Pr(>|t|)`), ]
 
 # final_model
-final_model <- glm(drg_yield ~ group_collapse + 
-                     gestation_days + 
-                     pre_existing_risk_maternal,
-                   data = train_key_vars, 
-                   family = Gamma(link = "log"))
+final_model <- lm(drg_yield ~ group_collapse + 
+                  gestation_days + 
+                  pre_existing_risk_maternal, 
+                data = train_key_vars)
 
 final_model_summary <- summary(final_model)
-
