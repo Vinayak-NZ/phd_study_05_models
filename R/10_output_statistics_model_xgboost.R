@@ -68,7 +68,8 @@ variable_importance$variable <- gsub("pre_existing_risk_fetal",
 
 # variable-importance-plot
 
-ggplot(variable_importance, aes(x = reorder(variable, importance), 
+xgboost_feature_importance <- 
+  ggplot(variable_importance, aes(x = reorder(variable, importance), 
                                 y = importance)) + 
   geom_col(fill = "#46e7fd") +
   labs(title = "XGBoost output", 
@@ -83,12 +84,18 @@ ggplot(variable_importance, aes(x = reorder(variable, importance),
         plot.caption = element_text(color = "#454543", face = "italic")) + 
   coord_flip()
 
+ggsave("output/xgboost_feature_importance.png", 
+       plot = xgboost_feature_importance)
+
 # output estimates of each predictor effect on outcome variable
 
-xgb_model_test <- train(x = data.matrix(subset(train_key_vars, select = -drg_yield)),
-                    y = train_key_vars$drg_yield, method = "xgbTree", metric = "Rsquared",
-                    trControl = trainControl(method = "cv", number = 10),
-                    tuneLength = 10)
+xgb_model_test <- train(x = data.matrix(subset(train_key_vars, 
+                                               select = -drg_yield)),
+                        y = train_key_vars$drg_yield, 
+                        method = "xgbTree", 
+                        metric = "RMSE",
+                        trControl = trainControl(method = "cv", number = 5),
+                        tuneGrid = param_grid)
 
 pdp.lstat <- partial(xgb_model_test, pred.var = "group_collapse", plot = TRUE, rug = TRUE)
 
@@ -126,7 +133,7 @@ pdp_effect_group_collapse_df <-
 
 intervention_labels <- c("No participation", "Participation")
 
-effect_group_collapse_plot <- 
+pdp_xgboost_intervention <- 
   ggplot(pdp_effect_group_collapse_df, aes(x = group_collapse, 
                                   y = prediction)) + 
   geom_col(fill = "#46e7fd") + 
@@ -145,9 +152,13 @@ effect_group_collapse_plot <-
            position = "jitter",
            sides = "b", inherit.aes = F)
 
+ggsave("output/pdp_xgboost_intervention.png", 
+       plot = pdp_xgboost_intervention)
+
 # pdp-plot-gestation-days
 
-pdp_effect_gestation_days$plot() +
+pdp_xgboost_gestation <- 
+  pdp_effect_gestation_days$plot() +
   labs(title = "Partial dependence plot", 
        subtitle = "Partial effect of gestation days on cost of care predictions",
        caption = "Data source: Obstetric Digital Health Intervention") +
@@ -159,6 +170,9 @@ pdp_effect_gestation_days$plot() +
         plot.caption = element_text(color = "#454543", face = "italic"), 
         axis.title.y = element_blank())
 
+ggsave("output/pdp_xgboost_gestation.png", 
+       plot = pdp_xgboost_gestation)
+
 # pdp-plot-intervention-complications
 
 complication_labels <- c("No", "Yes")
@@ -167,7 +181,8 @@ processed_intervention_complications_plot <- pdp_effect_intervention_complicatio
 
 processed_intervention_complications_plot$layers[[2]] <- NULL
 
-processed_intervention_complications_plot +
+pdp_xgboost_intervention_complications <- 
+  processed_intervention_complications_plot +
   labs(title = "Partial dependence plot", 
        subtitle = "Interaction effects of intervention and delivery complications on cost of care predictions",
        caption = "Data source: Obstetric Digital Health Intervention") +
@@ -181,3 +196,6 @@ processed_intervention_complications_plot +
         plot.subtitle = element_text(color = "#454543"),
         plot.caption = element_text(color = "#454543", face = "italic"), 
         legend.title = element_blank())
+
+ggsave("output/pdp_xgboost_intervention_complications.png", 
+       plot = pdp_xgboost_intervention_complications)

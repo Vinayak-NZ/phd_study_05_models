@@ -70,7 +70,8 @@ variable_importance$variable <- gsub("pre_existing_risk_fetal",
 
 # variable-importance-plot
 
-ggplot(variable_importance, aes(x = reorder(variable, importance), 
+random_forest_feature_importance <- 
+  ggplot(variable_importance, aes(x = reorder(variable, importance), 
                                 y = importance)) + 
   geom_col(fill = "#46e7fd") +
   labs(title = "Random forest output", 
@@ -84,6 +85,9 @@ ggplot(variable_importance, aes(x = reorder(variable, importance),
         plot.subtitle = element_text(color = "#454543"),
         plot.caption = element_text(color = "#454543", face = "italic")) + 
   coord_flip()
+
+ggsave("output/random_forest_feature_importance.png", 
+       plot = random_forest_feature_importance)
 
 # output estimates of each predictor effect on outcome variable
 
@@ -118,7 +122,8 @@ pdp_effect_intervention_complications <-
 
 intervention_labels <- c("No participation", "Participation")
 
-pdp_effect_group_collapse$plot() +
+pdp_rf_intervention <- 
+  pdp_effect_group_collapse$plot() +
   labs(title = "Partial dependence plot", 
        subtitle = "Partial effect of intervention on cost of care predictions",
        caption = "Data source: Obstetric Digital Health Intervention") +
@@ -131,9 +136,13 @@ pdp_effect_group_collapse$plot() +
         plot.caption = element_text(color = "#454543", face = "italic"), 
         axis.title.y = element_blank())
 
+ggsave("output/pdp_rf_intervention.png", 
+       plot = pdp_rf_intervention)
+
 # pdp-plot-gestation-days
 
-pdp_effect_gestation_days$plot() +
+pdp_rf_gestation <- 
+  pdp_effect_gestation_days$plot() +
   labs(title = "Partial dependence plot", 
        subtitle = "Partial effect of gestation days on cost of care predictions",
        caption = "Data source: Obstetric Digital Health Intervention") +
@@ -145,11 +154,15 @@ pdp_effect_gestation_days$plot() +
         plot.caption = element_text(color = "#454543", face = "italic"), 
         axis.title.y = element_blank())
 
+ggsave("output/pdp_rf_gestation.png", 
+       plot = pdp_rf_gestation)
+
 # pdp-plot-intervention-complications
 
 complication_labels <- c("No", "Yes")
 
-pdp_effect_intervention_complications$plot() +
+pdp_rf_intervention_complications <- 
+  pdp_effect_intervention_complications$plot() +
   labs(title = "Partial dependence plot", 
        subtitle = "Interaction effects of intervention and delivery complications on cost of care predictions",
        caption = "Data source: Obstetric Digital Health Intervention") +
@@ -163,3 +176,6 @@ pdp_effect_intervention_complications$plot() +
         plot.subtitle = element_text(color = "#454543"),
         plot.caption = element_text(color = "#454543", face = "italic"), 
         legend.title=element_blank())
+
+ggsave("output/pdp_rf_intervention_complications.png", 
+       plot = pdp_rf_intervention_complications)
