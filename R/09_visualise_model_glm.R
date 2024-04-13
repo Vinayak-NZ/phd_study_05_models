@@ -9,7 +9,8 @@ names(group_collapse.labs) <- c(0, 1)
 input_best_fit$pre_existing_risk_maternal <- 
   ifelse(input_best_fit$pre_existing_risk_maternal == 0, "Low", "High")
 
-ggplot(data = input_best_fit, aes(x = gestation_days, y = drg_yield)) +
+glm_best_fit_line <- 
+  ggplot(data = input_best_fit, aes(x = gestation_days, y = drg_yield)) +
   geom_point(aes(colour = pre_existing_risk_maternal)) +
   scale_colour_manual(values = c("#46e7fd", "#e18b22")) +
   geom_smooth(method = "lm") +
@@ -40,7 +41,8 @@ predicted_df$group_collapse <-
 predicted_df$pre_existing_risk_maternal <- 
   ifelse(predicted_df$pre_existing_risk_maternal == 0, "Low", "High")
 
-ggplot(predicted_df, aes(x=predicted, y= observed)) +
+glm_pred_obs_plot <- 
+  ggplot(predicted_df, aes(x=predicted, y= observed)) +
   geom_point(aes(colour = pre_existing_risk_maternal, shape = group_collapse)) +
   scale_colour_manual(values = c("#46e7fd", "#e18b22")) +
   geom_abline(intercept=0, slope=1) +
@@ -56,3 +58,9 @@ ggplot(predicted_df, aes(x=predicted, y= observed)) +
         plot.title = element_text(color = "#2F2E41", size = 12, face = "bold"),
         plot.subtitle = element_text(color = "#454543"),
         plot.caption = element_text(color = "#454543", face = "italic"))
+
+ggsave("output/glm_best_fit_line.png", 
+       plot = glm_best_fit_line)
+
+ggsave("output/glm_pred_obs_plot.png", 
+       plot = glm_pred_obs_plot)

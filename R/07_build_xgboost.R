@@ -65,5 +65,3 @@ xgb_model <- xgboost(data = as.matrix(train_key_vars[, -1]),
                      label = train_key_vars[, 1], 
                      nrounds = 300, 
                      params = xgb_params_tuned)
-
-

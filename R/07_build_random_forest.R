@@ -15,6 +15,28 @@ train_key_vars <- train[,
                           "pre_existing_risk_fetal", 
                           "pre_existing_risk_maternal")]
 
+# format categorical variables as factors
+
+train_key_vars$group_collapse <- as.factor(train_key_vars$group_collapse)
+
+train_key_vars$time_birth <- as.factor(train_key_vars$time_birth)
+
+train_key_vars$first_birth <- as.factor(train_key_vars$first_birth)
+
+train_key_vars$multiple_birth <- as.factor(train_key_vars$multiple_birth)
+
+train_key_vars$missed_due_date <- as.factor(train_key_vars$missed_due_date)
+
+train_key_vars$complications_delivery <- as.factor(train_key_vars$complications_delivery)
+
+train_key_vars$complications_maternal <- as.factor(train_key_vars$complications_maternal)
+
+train_key_vars$complications_fetal <- as.factor(train_key_vars$complications_fetal)
+
+train_key_vars$pre_existing_risk_fetal <- as.factor(train_key_vars$pre_existing_risk_fetal)
+
+train_key_vars$pre_existing_risk_maternal <- as.factor(train_key_vars$pre_existing_risk_maternal)
+
 # default parameters
 
 predictors <- names(train_key_vars)[2:13]
@@ -47,10 +69,12 @@ rf_tune <- train(
 
 print(rf_tune$bestTune)
 
+set.seed(555)
 final_rf_model <- randomForest(
   drg_yield ~ .,
   data = train_key_vars,
   ntree = 100,
-  mtry = 4
+  mtry = 4, 
+  importance = TRUE
 )
 

@@ -10,7 +10,8 @@ posterior_data <- data.frame(values = posterior, distribution = "Posterior")
 
 distribution_compare <- rbind(prior_data, posterior_data)
 
-ggplot(distribution_compare, aes(x = values, fill = distribution)) +
+bayes_demo_plot <-
+  ggplot(distribution_compare, aes(x = values, fill = distribution)) +
   geom_area(aes(y = ..density..), stat = "bin", alpha = 0.6) + 
   scale_fill_manual(values = c("#46e7fd", "#e18b22")) + 
   labs(title = "Bayesian model representation", 
@@ -26,3 +27,6 @@ ggplot(distribution_compare, aes(x = values, fill = distribution)) +
         plot.title = element_text(color = "#2F2E41", size = 12, face = "bold"),
         plot.subtitle = element_text(color = "#454543"),
         plot.caption = element_text(color = "#454543", face = "italic")) 
+
+ggsave("output/bayes_demo_plot.png", 
+       plot = bayes_demo_plot)

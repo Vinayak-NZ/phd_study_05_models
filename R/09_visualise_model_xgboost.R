@@ -225,3 +225,14 @@ ggparty(sub_tree_party_04) +
                               axis.ticks.y = element_blank(), 
                               axis.ticks.x = element_blank())))
 
+ggsave("output/plot_xgboost_demo_tree_01.png", 
+       plot = plot_tree_01)
+
+ggsave("output/plot_xgboost_demo_tree_02.png", 
+       plot = plot_tree_02)
+
+ggsave("output/plot_xgboost_demo_tree_03.png", 
+       plot = plot_tree_03)
+
+ggsave("output/plot_xgboost_demo_tree_04.png", 
+       plot = plot_tree_04)

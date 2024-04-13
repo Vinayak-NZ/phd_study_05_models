@@ -15,6 +15,8 @@ test_key_vars <- test[,
                         "pre_existing_risk_fetal", 
                         "pre_existing_risk_maternal")]
 
+
+
 # make predictions to test set
 predictions <- predict(final_rf_model, newdata = test_key_vars)
 

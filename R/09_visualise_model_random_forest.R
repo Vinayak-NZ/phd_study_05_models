@@ -35,6 +35,8 @@ tree_04 <- rpart(drg_yield ~ ., data = sub_04)
 
 # output-trees
 
+png(file="output/random_forest_demo_plot.png")
+
 par(mar = c(2.5, 2.5, 1, 1))
 layout(matrix(c(1, 2, 3, 4, 1, 5, 3, 6), ncol=2), heights=c(1, 3, 1, 3))
 plot.new()
@@ -44,3 +46,5 @@ plot.new()
 rpart.plot(tree_02, type=5)
 rpart.plot(tree_03, type=5)
 rpart.plot(tree_04, type=5)
+
+dev.off()
