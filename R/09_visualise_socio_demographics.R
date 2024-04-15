@@ -65,38 +65,6 @@ health_gestation_days <-
 ggsave("output/health_gestation_days.png", 
        plot = health_gestation_days)
 
-# complications-drg
-
-data_complete_cases_complications <- data_complete_cases
-
-data_complete_cases_complications$complications_drg <- 
-  ifelse(data_complete_cases_complications$complications_drg == "no-complications", "No", "Yes")
-
-group_collapse.labs <- c("Control", "Intervention")
-names(group_collapse.labs) <- c("control", "intervention")
-
-complications_drg_plot <- 
-  ggplot(data_complete_cases_complications) +
-  geom_bar(aes(x=complications_drg), fill = "#4739a2") +
-  labs(title = paste0("Characteristics of sample"), 
-       subtitle = "Bar chart of complications based on diagnosis related groups (DRG)",
-       caption = "Data source: Obstetric Digital Health Intervention") +
-  xlab("DRGs with complications") + 
-  ylab("Count") + 
-  facet_wrap(~group_collapse, 
-             labeller = labeller(group_collapse = group_collapse.labs)) + 
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"), 
-        plot.title = element_text(color = "#2F2E41", size = 12, face = "bold"),
-        plot.subtitle = element_text(color = "#454543"),
-        plot.caption = element_text(color = "#454543", face = "italic"), 
-        legend.key = element_rect(fill = NA),
-        legend.key.width = unit(0, "pt"),
-        legend.spacing.x = unit(0, "pt")) 
-
-ggsave("output/complications_drg_plot.png", 
-       plot = complications_drg_plot)
-
 # complications-maternal
 data_complete_cases_complications <- data_complete_cases
 

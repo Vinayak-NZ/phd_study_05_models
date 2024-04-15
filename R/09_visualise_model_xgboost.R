@@ -162,7 +162,7 @@ plot_tree_01 <-
   geom_edge_label() +
   geom_node_label(aes(label = splitvar), ids = "inner") +
   geom_node_plot(gglist = 
-                   list(geom_histogram(aes(x = !!fit_party$terms[[2]])), 
+                   list(geom_histogram(aes(x = !!sub_tree_party_01$terms[[2]])), 
                         scale_fill_manual("#46e7fd"), 
                         xlab("\u20AC"), 
                         theme(panel.grid.major = element_blank(), 
@@ -180,7 +180,7 @@ ggparty(sub_tree_party_02) +
   geom_edge_label() +
   geom_node_label(aes(label = splitvar), ids = "inner") +
   geom_node_plot(gglist = 
-                   list(geom_histogram(aes(x = !!fit_party$terms[[2]])), 
+                   list(geom_histogram(aes(x = !!sub_tree_party_02$terms[[2]])), 
                         xlab("\u20AC"), 
                         theme(panel.grid.major = element_blank(), 
                               panel.grid.minor = element_blank(),
@@ -197,7 +197,7 @@ ggparty(sub_tree_party_03) +
   geom_edge_label() +
   geom_node_label(aes(label = splitvar), ids = "inner") +
   geom_node_plot(gglist = 
-                   list(geom_histogram(aes(x = !!fit_party$terms[[2]])), 
+                   list(geom_histogram(aes(x = !!sub_tree_party_03$terms[[2]])), 
                         xlab("\u20AC"), 
                         theme(panel.grid.major = element_blank(), 
                               panel.grid.minor = element_blank(),
@@ -214,7 +214,7 @@ ggparty(sub_tree_party_04) +
   geom_edge_label() +
   geom_node_label(aes(label = splitvar), ids = "inner") +
   geom_node_plot(gglist = 
-                   list(geom_histogram(aes(x = !!fit_party$terms[[2]])), 
+                   list(geom_histogram(aes(x = !!sub_tree_party_04$terms[[2]])), 
                         xlab("\u20AC"), 
                         theme(panel.grid.major = element_blank(), 
                               panel.grid.minor = element_blank(),

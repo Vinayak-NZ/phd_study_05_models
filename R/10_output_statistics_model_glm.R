@@ -32,4 +32,6 @@ names(output_glm_data_frame) <- c("Term",
                                   "CI_lower", 
                                   "CI_upper")
 
-nice_table(output_glm_data_frame)
+glm_table <- nice_table(output_glm_data_frame)
+
+print(glm_table, preview = "docx")

@@ -97,12 +97,6 @@ xgb_model_test <- train(x = data.matrix(subset(train_key_vars,
                         trControl = trainControl(method = "cv", number = 5),
                         tuneGrid = param_grid)
 
-pdp.lstat <- partial(xgb_model_test, pred.var = "group_collapse", plot = TRUE, rug = TRUE)
-
-
-pdp.lstat <- partial(xgb_model_test, pred.var = c("group_collapse", "time_birth"), plot = TRUE, rug = TRUE)
-
-
 pdp_plot_model <- Predictor$new(xgb_model_test, data = train_key_vars)
 
 pdp_effect_group_collapse <- 

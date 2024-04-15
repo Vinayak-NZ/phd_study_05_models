@@ -29,7 +29,7 @@ glm_best_fit_line <-
         plot.caption = element_text(color = "#454543", face = "italic"))
 
 # plot-predicted-observed
-predicted_df <- data.frame(predicted = predict(final_model, test), 
+predicted_df <- data.frame(predicted = predict(final_model, test_key_vars, type = "response"), 
                            observed = test$drg_yield,
                            gestation_days = test$gestation_days, 
                            pre_existing_risk_maternal = test$pre_existing_risk_maternal, 
