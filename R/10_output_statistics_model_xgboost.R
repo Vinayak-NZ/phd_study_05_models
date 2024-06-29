@@ -135,7 +135,7 @@ pdp_xgboost_intervention <-
        subtitle = "Partial effect of intervention on cost of care predictions",
        caption = "Data source: Obstetric Digital Health Intervention") +
   xlab("Communication intervention") +
-  scale_x_discrete(labels = intervention_labels) +
+  scale_x_continuous(breaks = c(0, 1), labels = intervention_labels) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         plot.title = element_text(color = "#2F2E41", size = 12, face = "bold"),

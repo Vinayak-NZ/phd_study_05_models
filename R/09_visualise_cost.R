@@ -15,7 +15,7 @@ drg_yield_plot <-
        subtitle = "Histogram of treatment cost distribution in sample",
        caption = "Data source: Obstetric Digital Health Intervention") +
   xlab("Cost of care (Euro)") + 
-  ylab("Count") + 
+  ylab("Frequency") + 
   scale_x_continuous(limits = c(500, 20000), oob = scales::oob_keep) +
   scale_y_continuous(limits = c(0, 20)) +
   facet_wrap(~ group_collapse, 
