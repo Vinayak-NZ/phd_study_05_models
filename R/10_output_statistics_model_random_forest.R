@@ -78,7 +78,7 @@ random_forest_feature_importance <-
        subtitle = "Feature importance plot",
        caption = "Data source: Obstetric Digital Health Intervention") +
   xlab("Variable") + 
-  ylab("Importance (% Increase of MSE)") + 
+  ylab("Importance (MSE reduction)") + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         plot.title = element_text(color = "#2F2E41", size = 12, face = "bold"),
